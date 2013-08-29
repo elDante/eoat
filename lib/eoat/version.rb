@@ -1,3 +1,3 @@
-module Eoat
-  VERSION = "0.0.1"
+module EOAT
+  VERSION = '0.0.1'
 end
