@@ -5,8 +5,10 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'eoat'
-require 'rspec/core'
 require 'webmock/rspec'
+require 'rspec/core'
+require 'rr'
+
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
