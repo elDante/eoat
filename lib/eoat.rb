@@ -13,12 +13,12 @@ require 'eoat/result/eve_type'
 # @author Ivan Kotov {mailto:i.s.kotov.ws e-mail}
 module EOAT
   @cache = EOAT::Cache::NoneCache.new
-  @max_ttl = 2592000
   @headers = {
       'User-Agent' => "EOAT/#{EOAT::VERSION} (Eve Online Api Toolbox;+https://github.com/elDante/eoat)",
       'Accept-Encoding' => 'gzip',
       'Accept-Charset' => 'utf-8'
   }
+  @max_ttl = 30*24*60*60
 
   # Return current cache storage class instance
   # @example Get current cache storage
@@ -38,7 +38,11 @@ module EOAT
   #   EOAT.cache = EOAT::Cache::MemcachedCache.new
   # @param [CacheClass] val
   def self.cache=(val)
-    @cache = val
+    if EOAT::Cache.constants.include? val.class.name.split('::').last.to_sym
+      @cache = val
+    else
+      raise TypeError, "Wrong cache class #{val.class}"
+    end
   end
 
   # This method allows to control the request headers
@@ -64,7 +68,11 @@ module EOAT
   # Allow set maximum TTL of cache
   # @param [Fixnum] val
   def self.max_ttl=(val)
-    @max_ttl = val
+    if val.class == Fixnum
+      @max_ttl = val
+    else
+      raise TypeError, "Wrong class #{val.class} of value, it should be Fixnum"
+    end
   end
 end
 

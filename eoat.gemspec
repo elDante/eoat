@@ -31,4 +31,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec-core', '~> 2.14.5'
   spec.add_development_dependency 'rspec-expectations', '~> 2.14.2'
   spec.add_development_dependency 'rr', '~> 1.1.2'
+  spec.add_development_dependency 'webmock', '~> 1.13.0'
 end
