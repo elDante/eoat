@@ -1,3 +1,4 @@
+--type-name-tag 'attribute:Attributes'
 --markup markdown
 --markup-provider redcarpet
 --charset utf-8

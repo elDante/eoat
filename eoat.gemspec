@@ -14,8 +14,8 @@ Gem::Specification.new do |spec|
   spec.license       = 'MIT'
 
   spec.platform    = Gem::Platform::RUBY
-  spec.required_ruby_version = '~> 1.9.3'
-  spec.add_dependency 'httparty', '~> 0.9.0'
+  spec.required_ruby_version = '>= 1.9.3'
+  spec.add_dependency 'httparty', '>= 0.11.0'
 
   spec.post_install_message = 'Thank you for choosing EOAT.'
 
@@ -24,11 +24,11 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler', '~> 1.3'
+  spec.add_development_dependency 'bundler', '~> 1.3.5'
   spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'redcarpet', '~> 1.17'
-  spec.add_development_dependency 'yard', '~> 0.7.5'
-  spec.add_development_dependency 'rspec-core', '~> 2.0'
-  spec.add_development_dependency 'rspec-expectations', '~> 2.0'
-  spec.add_development_dependency 'rr', '~> 1.0'
+  spec.add_development_dependency 'redcarpet', '~> 3.0.0'
+  spec.add_development_dependency 'yard', '~> 0.8.7'
+  spec.add_development_dependency 'rspec-core', '~> 2.14.5'
+  spec.add_development_dependency 'rspec-expectations', '~> 2.14.2'
+  spec.add_development_dependency 'rr', '~> 1.1.2'
 end

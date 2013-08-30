@@ -1,16 +1,33 @@
 module EOAT
+  # Collection of response parser classes
+  # @author Ivan Kotov {mailto:i.s.kotov.ws e-mail}
   module Result
+    # EveApi XML parser classes.
+    # Is used to parse the query result from the EVE API and ZKillboard API
+    # @author Ivan Kotov {mailto:i.s.kotov.ws e-mail}
+    # @note
+    #  I'm not proud written below. But I pursued only would it
+    #  be convenient to use. Thank for this xml structure from EVE API.
     module EveType
-      # TODO: Comments!
-      # TODO: case statement to function
+      # Parser class of of EVE API xml.
+      # Has the structure of the xml root. Starting from ['eveapi']
+      # @example
+      #   eve = EOAT::Result::EveType::Result.new(xml_to_hash)
+      #   eve.from_cache #=> false
+      # @attribute from_cache [FalseClass, TrueClass] Return `true` if data from cache
+      # @attribute cached_until [Time] Return `cachedUntil` as time
+      # @attribute request_time [Time] Alias to xml `currentTime` as time
+      # @attribute result [Array] List of children
       class Result
-        attr_accessor :from_cache, :cached_until, :request_time, :result
+        attr_accessor :from_cache
+        attr_reader :cached_until, :request_time, :result
 
-        def initialize(hash, cached=false)
+        # @param [Hash] hash the xml body parsed to hash
+        def initialize(hash)
           hash = hash.key?('eveapi') ? hash['eveapi'] : EOAT::Exception::ParseError.new('Wrong parse data')
-          @from_cache = cached
-          @request_time = Time.parse(hash['currentTime'] + 'UTC')
+          @from_cache = false
           @cached_until = Time.parse(hash['cachedUntil'] + 'UTC')
+          @request_time = Time.parse(hash['currentTime'] + 'UTC')
           @result = hash['result'].keys - Array.new(1, 'rowset')
           hash['result'].keys.each do |key|
             value = hash['result'][key]
@@ -28,7 +45,7 @@ module EOAT
                 self.class.send(
                     :define_method,
                     var_name,
-                    proc{self.instance_variable_get("@#{key}")}
+                    proc{self.instance_variable_get("@#{var_name}")}
                 )
               when Array
                 value.each do |v|
@@ -54,9 +71,16 @@ module EOAT
         end
       end
 
+      # Rowset container for xml data.
+      # Usually not called directly
+      # @attribute key [String] The value of key for indexing
+      # @attribute columns [Array] The array of methods names for Row class
+      # @attribute name [String] The name of rowset
+      # @attribute entries [Array] The array of Row objects
       class RowSet
         attr_accessor :key, :columns, :entries
 
+        # @param [Hash] hash the roset value from xml as hash
         def initialize(hash)
           @key = hash['key']
           @columns = hash['columns'].split(',')
@@ -76,12 +100,19 @@ module EOAT
         end
 
         # TODO: Correct method. Eliminate return of only the first result.
+
+        # Get method for entries. Used attribute `key` for indexing.
+        # Return first fount Row.
+        # @param [Integer, String] key the value that been search
         def get(key)
           @entries.at(@entries.index {|x| x.send(@key) == key.to_s})
         end
       end
 
+      # Key-values container. All methods generated automatically.
       class Row
+
+        # @param [Hash] hash the xml row value from xml as hash
         def initialize(hash)
           hash.each do |key, value|
             case value
