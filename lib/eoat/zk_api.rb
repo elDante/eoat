@@ -9,9 +9,9 @@ module EOAT
 
     # @param [Array] args the array of request parameters without value
     # @param [String] host the request host, default: https://zkillboard.com
-    def initialize(*args, host: 'https://zkillboard.com')
+    def initialize(*args, host: 'http://zkillboard.com')
       @host = host
-      @uri_part = args.join('/')
+      @uri_part = args.empty? ? '' : '/'.concat(args.join('/'))
     end
 
     # Create an request according to the method called.
@@ -27,7 +27,7 @@ module EOAT
     # @return [String]
     def create_uri(fake_method, **kwargs)
       @uri_part += kwargs ? kwargs.map {|k, v| "/#{k}/#{v}"}.join : ''
-      "/api/#{fake_method}/#{@uri_part}/xml"
+      "api/#{fake_method}#{@uri_part}/xml"
     end
   end
 end

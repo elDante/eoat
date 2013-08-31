@@ -5,10 +5,11 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'eoat'
-require 'webmock/rspec'
 require 'rspec/core'
+require 'webmock/rspec'
 require 'rr'
 
+include WebMock::API
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
@@ -23,4 +24,52 @@ RSpec.configure do |config|
 
   # Set use by default RR
   config.mock_with :rr
+end
+
+def stub_eve_request(uri, status=200)
+  stub_request(
+      :get,
+      'https://api.eveonline.com' + uri.to_s
+  ).
+      with(
+      :headers => EOAT.headers
+  ).to_return(
+      :body => File.open(
+          File.expand_path(
+              File.join(
+                  File.dirname(__FILE__),
+                  'fixtures/eve' + uri.split('?').first
+              )
+          )
+      ),
+      :headers => {
+          'transfer-encoding'=>['chunked'],
+          'content-type'=>['application/xml; charset=utf-8'],
+      },
+      :status => status
+  )
+end
+
+def stub_zk_request(uri, status=200)
+  stub_request(
+      :get,
+      'http://zkillboard.com/' + uri.to_s
+  ).
+      with(
+      :headers => EOAT.headers
+  ).to_return(
+      :body => File.open(
+          File.expand_path(
+              File.join(
+                  File.dirname(__FILE__),
+                  'fixtures/zkillboard/' + uri.tr('/', '-')
+              )
+          )
+      ),
+      :headers => {
+          'transfer-encoding'=>['chunked'],
+          'content-type'=>['application/xml; charset=utf-8'],
+      },
+      :status => status
+  )
 end

@@ -43,7 +43,7 @@ module EOAT
       kwargs = kwargs.merge({:keyID => @key_id, :vCode => @v_code}) unless @key_id.empty?
       query_string = kwargs ? kwargs.map {|k, v| "#{k}=#{v}"}.join('&') : ''
       query_string.insert(0, '?') unless query_string.empty?
-      "/#{@scope}/#{fake_method}.xml.aspx#{query_string}"
+      "#{@scope}/#{fake_method}.xml.aspx#{query_string}"
     end
   end
 end
