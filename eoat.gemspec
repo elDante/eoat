@@ -16,8 +16,6 @@ Gem::Specification.new do |spec|
   spec.platform    = Gem::Platform::RUBY
   spec.required_ruby_version = '>= 1.9.3'
   spec.add_dependency 'httparty', '>= 0.11.0'
-  spec.add_dependency 'memcache', '~> 1.4.1'
-  spec.add_dependency 'redis', '~> 3.0.4'
 
   spec.post_install_message = 'Thank you for choosing EOAT.'
 
