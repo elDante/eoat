@@ -1,6 +1,10 @@
 require File.expand_path(File.join(File.dirname(__FILE__), 'spec_helper'))
 
 describe EOAT do
+  before :each do
+    EOAT.cache = EOAT::Cache::NoneCache.new
+  end
+
   describe 'Check module methods' do
     it 'Should return the correct variable classes and values' do
       EOAT.cache.class.should == EOAT::Cache::NoneCache

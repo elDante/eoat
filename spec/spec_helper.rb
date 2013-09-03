@@ -20,7 +20,7 @@ RSpec.configure do |config|
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.
   #     --seed 1234
-  config.order = 'random'
+  config.order = :default
 
   # Set use by default RR
   config.mock_with :rr
@@ -50,7 +50,7 @@ def stub_eve_request(uri, status=200)
   )
 end
 
-def stub_zk_request(uri, status=200)
+def stub_zk_request(uri)
   stub_request(
       :get,
       'http://zkillboard.com/' + uri.to_s
@@ -70,6 +70,17 @@ def stub_zk_request(uri, status=200)
           'transfer-encoding'=>['chunked'],
           'content-type'=>['application/xml; charset=utf-8'],
       },
-      :status => status
+      :status => 200
+  )
+end
+
+def delete_cache
+  FileUtils.rmtree(
+      File.expand_path(
+          File.join(File.dirname(__FILE__),
+                    'fixtures/cache',
+                    '1309c631605e762ca0a8450211bb5bd9'
+          )
+      )
   )
 end

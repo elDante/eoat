@@ -15,7 +15,7 @@ module EOAT
       def initialize(server='localhost:11211', prefix='eoat')
         require 'memcache'
 
-        @backend = Memcache.new(:server => server, :namespace => prefix)
+        @backend = Memcache.new(:server => server, :namespace => prefix, :segment_large_values => true)
       end
 
       # Get object from cache

@@ -1,6 +1,10 @@
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'spec_helper'))
 
 describe EOAT::EveApi do
+  before :each do
+    EOAT.cache = EOAT::Cache::NoneCache.new
+  end
+
   describe 'initialization' do
     it 'can accept empty data to the input' do
       EOAT::EveApi.new

@@ -1,6 +1,10 @@
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'spec_helper'))
 
 describe EOAT::Result::EveType::Result do
+  before :each do
+    EOAT.cache = EOAT::Cache::NoneCache.new
+  end
+
   it 'should have the Result->RowSet->Row classes structure' do
     stub_eve_request('/eve/ErrorList.xml.aspx')
     response = EOAT::EveApi.new.ErrorList

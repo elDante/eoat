@@ -32,6 +32,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'yard', '~> 0.8.7'
   spec.add_development_dependency 'redcarpet', '~> 2.1.1'
   spec.add_development_dependency 'webmock', '~> 1.13.0'
-  #spec.add_development_dependency 'memcache', '~> 1.4.1'
+  spec.add_development_dependency 'memcache', '~> 1.4.1'
   spec.add_development_dependency 'redis', '~> 3.0.4'
 end
