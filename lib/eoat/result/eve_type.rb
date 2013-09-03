@@ -122,7 +122,7 @@ module EOAT
                   var_value = RowSet.new(value)
                 else
                   var_name = key
-                  var_value = value
+                  var_value = Row.new(value)
                 end
                 self.instance_variable_set("@#{var_name}",var_value)
                 self.class.send(
