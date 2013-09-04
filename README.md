@@ -29,12 +29,10 @@ Or install it yourself as:
 ## Usage
 
 ### EVE API
-
-* * *
+***
 
 #### Requests without authorization
-
-***
+---
 
 Example: get [Skill Tree](https://api.eveonline.com/eve/SkillTree.xml.aspx)
 
@@ -107,8 +105,7 @@ Example: get [Factional Warfare Top Stats](https://api.eveonline.com/eve/FacWarT
     => "trigger99"
 
 #### Authorized requests
-
-***
+---
 
 Example: get [API Key Info](https://wiki.eveonline.com/en/wiki/EVE_API_Account_APIKeyInfo)
 
