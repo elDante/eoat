@@ -181,7 +181,7 @@ Get the last 50 kill of a alliance No Value with no items and api verify
 
 ### Response errors
 
-All specific errors for gem are described in the module EOAT::Exception. Three of these will be described in detail.
+All specific errors for gem are described in the module `EOAT::Exception`. Three of these will be described in detail.
 
 <dl class="dl-horizontal">
     <dt><b>HTTP404Error</b></dt>
@@ -200,14 +200,14 @@ All specific errors for gem are described in the module EOAT::Exception. Three o
     </dd>
 </dl>
 
-Example EOAT::Exception::HTTP404Error
+Example `EOAT::Exception::HTTP404Error`
 
 ```ruby
 >> EOAT::EveApi.new.foo
 EOAT::Exception::HTTP404Error: Request url path '/eve/foo.xml.aspx' not found
 ```
 
-Example EOAT::Exception::HTTPError
+Example `EOAT::Exception::HTTPError`
 
 ```ruby
 >> begin
@@ -222,7 +222,7 @@ Example EOAT::Exception::HTTPError
 Request host 'https://api.eveonline.com' return error: '403 - Forbidden'
 ```
 
-Example EOAT::Exception::EveApiError
+Example `EOAT::Exception::EveApiError`
 
 ```ruby
 >> begin
