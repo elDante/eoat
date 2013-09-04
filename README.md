@@ -30,9 +30,11 @@ Or install it yourself as:
 
 ### EVE API
 
+* * *
+
 #### Requests without authorization
 
-**Example: Get [Skill Tree](https://api.eveonline.com/eve/SkillTree.xml.aspx)**
+Example: Get [Skill Tree](https://api.eveonline.com/eve/SkillTree.xml.aspx)
 
     >> require 'eoat'
     >> skill_tree = EOAT::EveApi.new.SkillTree
@@ -63,7 +65,7 @@ Or install it yourself as:
     => Interplanetary Consolidation
     => Command Center Upgrades
 
-**Example: Get [Server Status](https://api.eveonline.com/server/ServerStatus.xml.aspx/)**
+Example: Get [Server Status](https://api.eveonline.com/server/ServerStatus.xml.aspx/)
 
     >> api = EOAT::EveApi.new(:scope => 'server')
     >> server_status = api.ServerStatus
@@ -74,7 +76,7 @@ Or install it yourself as:
     >> server_status.onlinePlayers # String
     => "6361"
 
-**Example: Get [Character Info for characterID=208974814](https://api.eveonline.com/eve/CharacterInfo.xml.aspx?characterID=208974814)**
+Example: Get [Character Info for characterID=208974814](https://api.eveonline.com/eve/CharacterInfo.xml.aspx?characterID=208974814)
 
     >> api = EOAT::EveApi.new
     >> char_info = api.CharacterInfo(characterID: 208974814)
@@ -87,7 +89,7 @@ Or install it yourself as:
     >> char_info.employmentHistory # EOAT::Result::EveType::RowSet class instance
     >> char_info.employmentHistory.entries.last # EOAT::Result::EveType::Row class instance
 
-**Example: Get [Factional Warfare Top Stats](https://api.eveonline.com/eve/FacWarTopStats.xml.aspx)**
+Example: Get [Factional Warfare Top Stats](https://api.eveonline.com/eve/FacWarTopStats.xml.aspx)
 
     >> fw_stats = EOAT::EveApi.new.FacWarTopStats
     >> fw_stats.result
@@ -104,7 +106,7 @@ Or install it yourself as:
 
 #### Authorized requests
 
-**Example: Get [API Key Info](https://wiki.eveonline.com/en/wiki/EVE_API_Account_APIKeyInfo)
+Example: Get [API Key Info](https://wiki.eveonline.com/en/wiki/EVE_API_Account_APIKeyInfo)
 
     >> key_info = EOAT::EveApi.new(keyID, 'vCode', scope: 'account').APIKeyInfo
     >> key_info.result
@@ -120,7 +122,7 @@ Or install it yourself as:
     >> key_info.key.characters.get(208974814).characterName
     => "Evor Endo"
 
-**Example: Get [Member Tracking](https://wiki.eveonline.com/en/wiki/EVE_API_Corporation_Member_Tracking)
+Example: Get [Member Tracking](https://wiki.eveonline.com/en/wiki/EVE_API_Corporation_Member_Tracking)
 
     >> api = EOAT::EveApi.new(keyID, 'vCode', :scope => 'corp')
     >> tracking = api.MemberTracking(extended: true)
