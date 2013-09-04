@@ -55,13 +55,13 @@ module EOAT
         when 0
           EOAT::Exception.parse_error_page(r.parsed_response)
         when 404
-          raise EOAT::Exception::HTTP404Error.new "Request url path '#{@uri}' not found"
+          raise EOAT::Exception::HTTP404Error.new "Request url path '/#{@uri}' not found"
         else
           raise EOAT::Exception::HTTPError.new(
                     r.response.code.to_i,
                     r.headers.to_h
                 ),
-                "Request '#{@host}' return error: ''#{r.response.code} - #{r.response.message}''"
+                "Request host '#{@host}' return error: '#{r.response.code} - #{r.response.message}'"
       end
     end
 

@@ -179,7 +179,62 @@ Get the last 50 kill of a alliance No Value with no items and api verify
 => 50
 ```
 
-### Exceptions
+### Response errors
+
+All specific errors for gem are described in the module EOAT::Exception. Three of these will be described in detail.
+
+<dl class="dl-horizontal">
+    <dt><b>HTTP404Error</b></dt>
+    <dd>The error occurs when the response comes back with code 404.</dd>
+    <dt><b>HTTPError</b></dt>
+    <dd>
+        The error occurs when the response comes back with a code other than 200 and 404.
+        To get the error code and response headers, use methods <code>status</code> and <code>headers</code>
+    </dd>
+    <dt><b>EveApiError</b></dt>
+    <dd>
+        The error occurs when EVE API returns the custom XML error.
+        To determine the number of error, use the method <code>number</code>
+        For a complete list of errors can be found
+        <a href="https://api.eveonline.com/eve/ErrorList.xml.aspx" target="_blank">here</a>.
+    </dd>
+</dl>
+
+Example EOAT::Exception::HTTP404Error
+
+```ruby
+>> EOAT::EveApi.new.foo
+EOAT::Exception::HTTP404Error: Request url path '/eve/foo.xml.aspx' not found
+```
+
+Example EOAT::Exception::HTTPError
+
+```ruby
+>> begin
+?> EOAT::EveApi.new(123, 'bar', scope: 'account').APIKeyInfo
+>> rescue EOAT::Exception::HTTPError => e
+>> puts e.status
+>> puts e.headers
+>> puts e.message
+>> end
+403
+{"content-type"=>["text/html"], "date"=>["Wed, 04 Sep 2013 17:10:05 GMT"], "connection"=>["close"], "content-length"=>["1233"]}
+Request host 'https://api.eveonline.com' return error: '403 - Forbidden'
+```
+
+Example EOAT::Exception::EveApiError
+
+```ruby
+>> begin
+?> EOAT::EveApi.new(keyID, 'vCode', :scope => 'corp').KillLog
+>> rescue EOAT::Exception::EveApiError => e
+>> puts e.number
+>> puts e.message
+>> end
+120
+Expected beforeKillID [33012983] but supplied [0]. Please supply the expected killID!
+If you are not expecting this message it is possible that some other application is using this key!
+```
 
 ### Caching
 
