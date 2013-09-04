@@ -143,6 +143,46 @@ Example: get [Member Tracking](https://wiki.eveonline.com/en/wiki/EVE_API_Corpor
 => "Evor Endo"
 ```
 
+### ZKillboard API
+***
+
+#### Examples
+
+Get latest solo kill
+
+```ruby
+>> require 'eoat'
+>> solo = EOAT::ZKApi.new.solo
+>> solo.result
+=> ["kills"]
+>> solo.kills.entries.size
+=> 200
+>> solo.kills.entries.first.killID
+=> "33070118"
+>> solo.kills.entries.first.victim.characterName
+=> "Glorfinda Elundario"
+```
+
+or only 10 records
+
+```ruby
+>> solo = EOAT::ZKApi.new.solo(:limit => 10)
+>> solo.kills.entries.size
+=> 10
+```
+
+Get the last 50 kill of a alliance No Value with no items and api verify
+
+```ruby
+>> result = EOAT::ZKApi.new('no-items', 'api-only').kills(allianceID: 99002003, limit: 50)
+>> result.kills.entries.size
+=> 50
+```
+
+### Exceptions
+
+### Caching
+
 ## Contributing
 
 1. Fork it
