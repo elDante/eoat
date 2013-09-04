@@ -1,6 +1,6 @@
 # EOAT
 
-**EVE Online API Toolbox** a single tool to access the API of a variety of resources for the EVE Online.
+**EVE Online API Toolbox** a single tool to access the API of a variety resources for the EVE Online.
 
 ### Support of:
 
@@ -183,7 +183,7 @@ Get the last 50 kill of a alliance No Value with no items and api verify
 
 All specific errors for gem are described in the module `EOAT::Exception`. Three of these will be described in detail.
 
-<dl class="dl-horizontal">
+<dl>
     <dt><b>HTTP404Error</b></dt>
     <dd>The error occurs when the response comes back with code 404.</dd>
     <dt><b>HTTPError</b></dt>
@@ -237,6 +237,71 @@ If you are not expecting this message it is possible that some other application
 ```
 
 ### Caching
+
+To cache the result can be used three types of storage: file, memcached and redis.
+In the default configuration is used stub cache `EOAT::Cache::NoneCache` class.
+
+
+#### File
+
+The easiest way to cache the result. Since only used space on your hard disk.
+The default uses the path to store: `~/.eoat/cache`.
+
+Set store cache to files in the default path
+
+```ruby
+EOAT.cache = EOAT::Cache::FileCache.new
+```
+
+or set custom path
+
+```ruby
+EOAT.cache = EOAT::Cache::FileCache.new('new/path')
+```
+
+#### Memcached
+
+Memcached popular key-value database in memory. This is a good choice of places to store the cache.
+To use it, you must also install an additional dependence `gem memcache` and of course to have a running memcached.
+
+Set store cache in Memcached using standard connectivity options
+
+```ruby
+EOAT.cache = EOAT::Cache::MemcachedCache.new
+```
+
+or set custom address / port
+
+```ruby
+EOAT.cache = EOAT::Cache::MemcachedCache.new('address:port')
+```
+
+#### Redis
+
+Redis is a key-value journaling database in memory. Prevents you from losing data after a reboot.
+To use it, you must also install an additional dependence `gem redis` and running Redis daemon.
+
+Set store cache in Redis using standard connectivity options
+
+```ruby
+EOAT.cache = EOAT::Cache::RedisCache.new
+```
+
+or set custom address / port or socket
+
+```ruby
+EOAT.cache = EOAT::Cache::RedisCache.new(:host => 'address', :port => port)
+EOAT.cache = EOAT::Cache::RedisCache.new(:path => 'path/to/socket')
+```
+
+#### Additional options
+
+You can set the maximum cache lifetime in seconds. By default, the maximum TTL is set to 30 days.
+I do not recommend set it in a larger value than the default, if you use Memcached
+
+```ruby
+EOAT.max_ttl = 259200 # 3 days
+```
 
 ## Contributing
 
