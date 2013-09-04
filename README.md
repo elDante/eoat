@@ -33,7 +33,7 @@ Or install it yourself as:
 
 #### Requests without authorization
 
-Example, get [Skill Tree](https://api.eveonline.com/eve/SkillTree.xml.aspx)
+Example, get [skill tree](https://api.eveonline.com/eve/SkillTree.xml.aspx)
 
 ```ruby
 >> require 'eoat'
@@ -66,7 +66,7 @@ Interplanetary Consolidation
 Command Center Upgrades
 ```
 
-Example, get [Server Status](https://api.eveonline.com/server/ServerStatus.xml.aspx/)
+Example, get [server status](https://api.eveonline.com/server/ServerStatus.xml.aspx/)
 
 ```ruby
 >> api = EOAT::EveApi.new(:scope => 'server')
@@ -79,7 +79,7 @@ Example, get [Server Status](https://api.eveonline.com/server/ServerStatus.xml.a
 => "6361"
 ```
 
-Example, get [Character Info for characterID=208974814](https://api.eveonline.com/eve/CharacterInfo.xml.aspx?characterID=208974814)
+Example, get [character info for characterID=208974814](https://api.eveonline.com/eve/CharacterInfo.xml.aspx?characterID=208974814)
 
 ```ruby
 >> api = EOAT::EveApi.new
@@ -94,7 +94,7 @@ Example, get [Character Info for characterID=208974814](https://api.eveonline.co
 >> char_info.employmentHistory.entries.last # EOAT::Result::EveType::Row class instance
 ```
 
-Example, get [Factional Warfare Top Stats](https://api.eveonline.com/eve/FacWarTopStats.xml.aspx)
+Example, get [factional warfare top stats](https://api.eveonline.com/eve/FacWarTopStats.xml.aspx)
 
 ```ruby
 >> fw_stats = EOAT::EveApi.new.FacWarTopStats
@@ -113,7 +113,7 @@ Example, get [Factional Warfare Top Stats](https://api.eveonline.com/eve/FacWarT
 
 #### Authorized requests
 
-Example, get [API Key Info](https://wiki.eveonline.com/en/wiki/EVE_API_Account_APIKeyInfo)
+Example, get [API key info](https://wiki.eveonline.com/en/wiki/EVE_API_Account_APIKeyInfo)
 
 ```ruby
 >> key_info = EOAT::EveApi.new(keyID, 'vCode', scope: 'account').APIKeyInfo
@@ -131,7 +131,7 @@ Example, get [API Key Info](https://wiki.eveonline.com/en/wiki/EVE_API_Account_A
 => "Evor Endo"
 ```
 
-Example, get [Member Tracking](https://wiki.eveonline.com/en/wiki/EVE_API_Corporation_Member_Tracking)
+Example, get [members tracking](https://wiki.eveonline.com/en/wiki/EVE_API_Corporation_Member_Tracking)
 
 ```ruby
 >> api = EOAT::EveApi.new(keyID, 'vCode', :scope => 'corp')
@@ -322,7 +322,7 @@ Example
 
 ### Additional request parameters
 
-You can also change / add request headers.
+You can also change or add request headers.
 It may happen that you will be denied to provide data if you do not specify them.
 
 ```ruby
