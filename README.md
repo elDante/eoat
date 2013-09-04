@@ -297,10 +297,27 @@ EOAT.cache = EOAT::Cache::RedisCache.new(:path => 'path/to/socket')
 #### Additional options
 
 You can set the maximum cache lifetime in seconds. By default, the maximum TTL is set to 30 days.
-I do not recommend set it in a larger value than the default, if you use Memcached
+I do not recommend set it in a larger value than the default, if you use Memcached.
 
 ```ruby
 EOAT.max_ttl = 259200 # 3 days
+```
+
+#### Data checking
+
+You can check the relevance of the result. For this purpose there is a boolean parameter `from_cache` in Result class
+
+Example
+
+```ruby
+>> require 'eoat'
+>> EOAT.cache = EOAT::Cache::MemcachedCache.new
+>> errors = EOAT::EveApi.new.ErrorList
+>> errors.from_cache
+=> false
+>> errors = EOAT::EveApi.new.ErrorList
+>> errors.from_cache
+=> true
 ```
 
 ## Contributing
