@@ -28,8 +28,6 @@ Or install it yourself as:
 
 ## Usage
 
-### About response data
-
 ### EVE API
 
 #### Requests without authorization
@@ -103,6 +101,34 @@ Or install it yourself as:
     >> fw_stats.characters.KillsYesterday.entries.first # EOAT::Result::EveType::Row class instance
     >> fw_stats.characters.KillsYesterday.entries.first.characterName
     => "trigger99"
+
+#### Authorized requests
+
+**Example: Get [API Key Info](https://wiki.eveonline.com/en/wiki/EVE_API_Account_APIKeyInfo)
+
+    >> key_info = EOAT::EveApi.new(keyID, 'vCode', scope: 'account').APIKeyInfo
+    >> key_info.result
+    => ["key"]
+    >> key_info.key # EOAT::Result::EveType::Row class instance
+    >> key_info.key.expires
+    => ""
+    >> key_info.key.characters # EOAT::Result::EveType::RowSet class instance
+    >> key_info.key.characters.key
+    => "characterID"
+    >> key_info.key.characters.columns
+    => ["characterID", "characterName", "corporationID", "corporationName"]
+    >> key_info.key.characters.get(208974814).characterName
+    => "Evor Endo"
+
+**Example: Get [Member Tracking](https://wiki.eveonline.com/en/wiki/EVE_API_Corporation_Member_Tracking)
+
+    >> api = EOAT::EveApi.new(keyID, 'vCode', :scope => 'corp')
+    >> tracking = api.MemberTracking(extended: true)
+    >> tracking.result
+    => ["members"]
+    >> member = tracking.members.get(208974814)
+    >> member.name
+    => "Evor Endo"
 
 ## Contributing
 
