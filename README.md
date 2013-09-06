@@ -12,6 +12,25 @@
 * Ruby 2.0.0
 * httparty
 
+## Fast links
+
+* [Installation](#installation)
+* [Usage](#usage)
+  * [EVE API](#eve-api)
+    * [Requests without authorization](#requests-without-authorization)
+    * [Authorized requests](#authorized-requests)
+  * [ZKillboard API](#zkillboard-api)
+    * [Examples](#examples)
+  * [Response errors](#response-errors)
+  * [Caching](#caching)
+    * [File](#file)
+    * [Memcached](#memcached)
+    * [Redis](#redis)
+    * [Additional options](#additional-options)
+    * [Data checking](#data-checking)
+  * [Additional request parameters](#additional-request-parameters)
+* [Contributing](#contributing)
+
 ## Installation
 
 Add this line to your application's Gemfile:
