@@ -230,11 +230,11 @@ Example `EOAT::Exception::HTTPError`
 
 ```ruby
 begin
-EOAT::EveApi.new(123, 'bar', scope: 'account').APIKeyInfo
+  EOAT::EveApi.new(123, 'bar', scope: 'account').APIKeyInfo
 rescue EOAT::Exception::HTTPError => e
-puts e.status
-puts e.headers
-puts e.message
+  puts e.status
+  puts e.headers
+  puts e.message
 end
 403
 {"content-type"=>["text/html"], "date"=>["Wed, 04 Sep 2013 17:10:05 GMT"], "connection"=>["close"], "content-length"=>["1233"]}
@@ -245,10 +245,10 @@ Example `EOAT::Exception::EveApiError`
 
 ```ruby
 begin
-EOAT::EveApi.new(keyID, 'vCode', :scope => 'corp').KillLog
+  EOAT::EveApi.new(keyID, 'vCode', :scope => 'corp').KillLog
 rescue EOAT::Exception::EveApiError => e
-puts e.number
-puts e.message
+  puts e.number
+  puts e.message
 end
 120
 Expected beforeKillID [33012983] but supplied [0]. Please supply the expected killID!
