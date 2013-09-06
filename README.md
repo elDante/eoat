@@ -29,7 +29,8 @@ Or install it yourself as:
 ## Usage
 
 ### EVE API
-***
+
+Use `EOAT::EveApi` class to retrieve data from the EVE API.
 
 #### Requests without authorization
 
@@ -144,11 +145,12 @@ Example, get [members tracking](https://wiki.eveonline.com/en/wiki/EVE_API_Corpo
 ```
 
 ### ZKillboard API
-***
+
+Use `EOAT::ZKApi` class to retrieve data from the EVE API.
 
 #### Examples
 
-Get latest solo kill
+Get latest solo kill ([url](http://zkillboard.com/api/solo/xml))
 
 ```ruby
 >> require 'eoat'
@@ -163,7 +165,7 @@ Get latest solo kill
 => "Glorfinda Elundario"
 ```
 
-or only 10 records
+or only 10 records ([url](http://zkillboard.com/api/solo/limit/10/xml))
 
 ```ruby
 >> solo = EOAT::ZKApi.new.solo(:limit => 10)
@@ -171,7 +173,7 @@ or only 10 records
 => 10
 ```
 
-Get the last 50 kill of a alliance No Value with no items and api verified.
+Get the last 50 kill of a alliance No Value with no items and api verified ([url](http://zkillboard.com/api/kills/no-items/api-only/alliance/99002003/limit/50/xml)).
 
 ```ruby
 >> result = EOAT::ZKApi.new('no-items', 'api-only').kills(allianceID: 99002003, limit: 50)
