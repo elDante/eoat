@@ -54,30 +54,30 @@ Use `EOAT::EveApi` class to retrieve data from the EVE API.
 Example, get [skill tree](https://api.eveonline.com/eve/SkillTree.xml.aspx)
 
 ```ruby
->> require 'eoat'
->> skill_tree = EOAT::EveApi.new.SkillTree
->> skill_tree.result # EOAT::Result::EveType::Result class instance
+ require 'eoat'
+ skill_tree = EOAT::EveApi.new.SkillTree
+ skill_tree.result # EOAT::Result::EveType::Result class instance
 => ["skillGroups"]
->> skill_tree.skillGroups # EOAT::Result::EveType::RowSet class instance
->> skill_tree.skillGroups.columns
+ skill_tree.skillGroups # EOAT::Result::EveType::RowSet class instance
+ skill_tree.skillGroups.columns
 => ["groupName", "groupID"]
->> skill_tree.skillGroups.key
+ skill_tree.skillGroups.key
 => "groupID"
->> skill_tree.skillGroups.entries # Array class instance
->> group = skill_tree.skillGroups.get 1241 # EOAT::Result::EveType::Row class instance or
->> group = skill_tree.skillGroups.entries.first
->> group.groupID
+ skill_tree.skillGroups.entries # Array class instance
+ group = skill_tree.skillGroups.get 1241 # EOAT::Result::EveType::Row class instance or
+ group = skill_tree.skillGroups.entries.first
+ group.groupID
 => "1241"
->> group.groupName
+ group.groupName
 => "Planet Management"
->> group.skills # EOAT::Result::EveType::RowSet class instance
->> group.skills.key
+ group.skills # EOAT::Result::EveType::RowSet class instance
+ group.skills.key
 => "typeID"
->> group.skills.columns
+ group.skills.columns
 => ["typeName", "groupID", "typeID", "published"]
->> group.skills.get(2403).typeName
+ group.skills.get(2403).typeName
 => "Advanced Planetology"
->> group.skills.entries.each { |skill| puts skill.typeName }
+ group.skills.entries.each { |skill| puts skill.typeName }
 Advanced Planetology
 Planetology
 Interplanetary Consolidation
@@ -87,45 +87,45 @@ Command Center Upgrades
 Example, get [server status](https://api.eveonline.com/server/ServerStatus.xml.aspx/)
 
 ```ruby
->> api = EOAT::EveApi.new(:scope => 'server')
->> server_status = api.ServerStatus
->> server_status.result
+ api = EOAT::EveApi.new(:scope => 'server')
+ server_status = api.ServerStatus
+ server_status.result
 => ["serverOpen", "onlinePlayers"]
->> server_status.serverOpen # String
+ server_status.serverOpen # String
 => "True"
->> server_status.onlinePlayers # String
+ server_status.onlinePlayers # String
 => "6361"
 ```
 
 Example, get [character info for characterID=208974814](https://api.eveonline.com/eve/CharacterInfo.xml.aspx?characterID=208974814)
 
 ```ruby
->> api = EOAT::EveApi.new
->> char_info = api.CharacterInfo(characterID: 208974814)
->> char_info.result
+ api = EOAT::EveApi.new
+ char_info = api.CharacterInfo(characterID: 208974814)
+ char_info.result
 => ["characterID", "characterName", "race", "bloodline", "corporationID", "corporation", ...]
->> char_info.characterName # String
+ char_info.characterName # String
 => "Evor Endo"
->> char_info.corporation # String
+ char_info.corporation # String
 => "NeoCorteX Industry"
->> char_info.employmentHistory # EOAT::Result::EveType::RowSet class instance
->> char_info.employmentHistory.entries.last # EOAT::Result::EveType::Row class instance
+ char_info.employmentHistory # EOAT::Result::EveType::RowSet class instance
+ char_info.employmentHistory.entries.last # EOAT::Result::EveType::Row class instance
 ```
 
 Example, get [factional warfare top stats](https://api.eveonline.com/eve/FacWarTopStats.xml.aspx)
 
 ```ruby
->> fw_stats = EOAT::EveApi.new.FacWarTopStats
->> fw_stats.result
+ fw_stats = EOAT::EveApi.new.FacWarTopStats
+ fw_stats.result
 => ["characters", "corporations", "factions"]
->> fw_stats.characters # EOAT::Result::EveType::Row class instance
->> fw_stats.characters.KillsYesterday # EOAT::Result::EveType::RowSet class instance
->> fw_stats.characters.KillsYesterday.key
+ fw_stats.characters # EOAT::Result::EveType::Row class instance
+ fw_stats.characters.KillsYesterday # EOAT::Result::EveType::RowSet class instance
+ fw_stats.characters.KillsYesterday.key
 => "characterID"
->> fw_stats.characters.KillsYesterday.columns
+ fw_stats.characters.KillsYesterday.columns
 => ["characterID", "characterName", "kills"]
->> fw_stats.characters.KillsYesterday.entries.first # EOAT::Result::EveType::Row class instance
->> fw_stats.characters.KillsYesterday.entries.first.characterName
+ fw_stats.characters.KillsYesterday.entries.first # EOAT::Result::EveType::Row class instance
+ fw_stats.characters.KillsYesterday.entries.first.characterName
 => "trigger99"
 ```
 
@@ -134,30 +134,30 @@ Example, get [factional warfare top stats](https://api.eveonline.com/eve/FacWarT
 Example, get [API key info](https://wiki.eveonline.com/en/wiki/EVE_API_Account_APIKeyInfo)
 
 ```ruby
->> key_info = EOAT::EveApi.new(keyID, 'vCode', scope: 'account').APIKeyInfo
->> key_info.result
+ key_info = EOAT::EveApi.new(keyID, 'vCode', scope: 'account').APIKeyInfo
+ key_info.result
 => ["key"]
->> key_info.key # EOAT::Result::EveType::Row class instance
->> key_info.key.expires
+ key_info.key # EOAT::Result::EveType::Row class instance
+ key_info.key.expires
 => ""
->> key_info.key.characters # EOAT::Result::EveType::RowSet class instance
->> key_info.key.characters.key
+ key_info.key.characters # EOAT::Result::EveType::RowSet class instance
+ key_info.key.characters.key
 => "characterID"
->> key_info.key.characters.columns
+ key_info.key.characters.columns
 => ["characterID", "characterName", "corporationID", "corporationName"]
->> key_info.key.characters.get(208974814).characterName
+ key_info.key.characters.get(208974814).characterName
 => "Evor Endo"
 ```
 
 Example, get [members tracking](https://wiki.eveonline.com/en/wiki/EVE_API_Corporation_Member_Tracking)
 
 ```ruby
->> api = EOAT::EveApi.new(keyID, 'vCode', :scope => 'corp')
->> tracking = api.MemberTracking(extended: true)
->> tracking.result
+ api = EOAT::EveApi.new(keyID, 'vCode', :scope => 'corp')
+ tracking = api.MemberTracking(extended: true)
+ tracking.result
 => ["members"]
->> member = tracking.members.get(208974814)
->> member.name
+ member = tracking.members.get(208974814)
+ member.name
 => "Evor Endo"
 ```
 
@@ -170,31 +170,31 @@ Use `EOAT::ZKApi` class to retrieve data from the EVE API.
 Get latest solo kill ([url](http://zkillboard.com/api/solo/xml))
 
 ```ruby
->> require 'eoat'
->> solo = EOAT::ZKApi.new.solo
->> solo.result
+ require 'eoat'
+ solo = EOAT::ZKApi.new.solo
+ solo.result
 => ["kills"]
->> solo.kills.entries.size
+ solo.kills.entries.size
 => 200
->> solo.kills.entries.first.killID
+ solo.kills.entries.first.killID
 => "33070118"
->> solo.kills.entries.first.victim.characterName
+ solo.kills.entries.first.victim.characterName
 => "Glorfinda Elundario"
 ```
 
 or only 10 records ([url](http://zkillboard.com/api/solo/limit/10/xml))
 
 ```ruby
->> solo = EOAT::ZKApi.new.solo(:limit => 10)
->> solo.kills.entries.size
+ solo = EOAT::ZKApi.new.solo(:limit => 10)
+ solo.kills.entries.size
 => 10
 ```
 
 Get the last 50 kill of a alliance No Value with no items and api verified ([url](http://zkillboard.com/api/kills/no-items/api-only/alliance/99002003/limit/50/xml)).
 
 ```ruby
->> result = EOAT::ZKApi.new('no-items', 'api-only').kills(allianceID: 99002003, limit: 50)
->> result.kills.entries.size
+ result = EOAT::ZKApi.new('no-items', 'api-only').kills(allianceID: 99002003, limit: 50)
+ result.kills.entries.size
 => 50
 ```
 
@@ -222,20 +222,20 @@ All specific errors for gem are described in the module `EOAT::Exception`. Three
 Example `EOAT::Exception::HTTP404Error`
 
 ```ruby
->> EOAT::EveApi.new.foo
+ EOAT::EveApi.new.foo
 EOAT::Exception::HTTP404Error: Request url path '/eve/foo.xml.aspx' not found
 ```
 
 Example `EOAT::Exception::HTTPError`
 
 ```ruby
->> begin
-?> EOAT::EveApi.new(123, 'bar', scope: 'account').APIKeyInfo
->> rescue EOAT::Exception::HTTPError => e
->> puts e.status
->> puts e.headers
->> puts e.message
->> end
+ begin
+ EOAT::EveApi.new(123, 'bar', scope: 'account').APIKeyInfo
+ rescue EOAT::Exception::HTTPError => e
+ puts e.status
+ puts e.headers
+ puts e.message
+ end
 403
 {"content-type"=>["text/html"], "date"=>["Wed, 04 Sep 2013 17:10:05 GMT"], "connection"=>["close"], "content-length"=>["1233"]}
 Request host 'https://api.eveonline.com' return error: '403 - Forbidden'
@@ -244,12 +244,12 @@ Request host 'https://api.eveonline.com' return error: '403 - Forbidden'
 Example `EOAT::Exception::EveApiError`
 
 ```ruby
->> begin
-?> EOAT::EveApi.new(keyID, 'vCode', :scope => 'corp').KillLog
->> rescue EOAT::Exception::EveApiError => e
->> puts e.number
->> puts e.message
->> end
+ begin
+ EOAT::EveApi.new(keyID, 'vCode', :scope => 'corp').KillLog
+ rescue EOAT::Exception::EveApiError => e
+ puts e.number
+ puts e.message
+ end
 120
 Expected beforeKillID [33012983] but supplied [0]. Please supply the expected killID!
 If you are not expecting this message it is possible that some other application is using this key!
@@ -329,13 +329,13 @@ You can check the relevance of the result. For this purpose there is a boolean p
 Example
 
 ```ruby
->> require 'eoat'
->> EOAT.cache = EOAT::Cache::MemcachedCache.new
->> errors = EOAT::EveApi.new.ErrorList
->> errors.from_cache
+ require 'eoat'
+ EOAT.cache = EOAT::Cache::MemcachedCache.new
+ errors = EOAT::EveApi.new.ErrorList
+ errors.from_cache
 => false
->> errors = EOAT::EveApi.new.ErrorList
->> errors.from_cache
+ errors = EOAT::EveApi.new.ErrorList
+ errors.from_cache
 => true
 ```
 
@@ -345,11 +345,11 @@ You can also change or add request headers.
 It may happen that you will be denied to provide data if you do not specify them.
 
 ```ruby
->> EOAT.headers
+ EOAT.headers
 => {"User-Agent"=>"EOAT/0.0.1 (Eve Online Api Toolbox;+https://github.com/elDante/eoat)", "Accept-Encoding"=>"gzip", "Accept-Charset"=>"utf-8"}
->> EOAT.headers['User-Agent'] = 'Custom User-Agent'
->> EOAT.headers['Host'] = 'example.com'
->> EOAT.headers['From'] = 'user@example.com'
+ EOAT.headers['User-Agent'] = 'Custom User-Agent'
+ EOAT.headers['Host'] = 'example.com'
+ EOAT.headers['From'] = 'user@example.com'
 ```
 
 ## Contributing
