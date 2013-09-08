@@ -57,7 +57,7 @@ module EOAT
                   )
                   @result << v['name']
                 end
-              when String
+              when String, NilClass
                 self.instance_variable_set("@#{key}", value)
                 self.class.send(
                     :define_method,
