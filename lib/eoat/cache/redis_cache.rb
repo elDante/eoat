@@ -29,10 +29,18 @@ module EOAT
       def get(host, uri)
         # Set key as md5 string
         key = @prefix + EOAT::Cache.md5hash(host + uri)
-        cache = @backend.get(key)
+        yaml = @backend.get(key)
         # If the data is successfully received,
         # then restore instance from yaml string
-        cache ? YAML::load(cache) : false
+        if yaml
+          if EOAT::Cache.md5hash(yaml) == @backend.get(key + '_hash')
+            return YAML::load(yaml)
+          else
+            @backend.del(key, key + '_hash')
+          end
+        else
+        end
+        false
       end
 
       # Save instance of result class.
@@ -54,6 +62,15 @@ module EOAT
           @backend.set(key, yaml)
           # Set TTL
           @backend.expire(key, expire)
+          # Hash record
+          @backend.set(
+              key + '_hash',
+              EOAT::Cache.md5hash(yaml)
+          )
+          @backend.expire(
+              key + '_hash',
+              expire
+          )
         end
       end
     end

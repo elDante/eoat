@@ -26,7 +26,16 @@ module EOAT
       def get(host, uri)
         # Set key as md5 string
         key = EOAT::Cache.md5hash(host + uri)
-        @backend.get(key)
+        response = @backend.get(key)
+        if response
+          if EOAT::Cache.md5hash(response.to_yaml) == @backend.get(key + '_hash')
+            return response
+          else
+            @backend.delete(key)
+            @backend.delete(key + '_hash')
+          end
+        end
+        false
       end
 
       # Save instance of result class.
@@ -45,6 +54,11 @@ module EOAT
           @backend.set(
               key,
               content,
+              :expiry => expire
+          )
+          @backend.set(
+              key + '_hash',
+              EOAT::Cache.md5hash(content.to_yaml),
               :expiry => expire
           )
         end

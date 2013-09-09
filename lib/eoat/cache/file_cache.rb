@@ -38,7 +38,13 @@ module EOAT
           Dir["#{request_path}/*"].each do |dir|
             # Check timestamp
             if dir.split('/').last.to_i > now
-              return YAML::load_file("#{dir}/result.yml")
+              yaml = File.read("#{dir}/result.yml")
+              yaml_hash = File.read("#{dir}/result.md5")
+              if EOAT::Cache.md5hash(yaml) == yaml_hash
+                return YAML::load(yaml)
+              else
+                FileUtils.rmtree("#{dir}")
+              end
             else
               FileUtils.rmtree("#{dir}")
             end
@@ -76,7 +82,9 @@ module EOAT
           # Create directory
           FileUtils.mkpath(save_path)
           # Save instance to result.yml
-          File.write("#{save_path}/result.yml", content.to_yaml)
+          content_yaml = content.to_yaml
+          File.write("#{save_path}/result.md5", EOAT::Cache.md5hash(content_yaml))
+          File.write("#{save_path}/result.yml", content_yaml)
         end
       end
 
