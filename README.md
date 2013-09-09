@@ -64,7 +64,18 @@ skill_tree.skillGroups.columns
 skill_tree.skillGroups.key
 => "groupID"
 skill_tree.skillGroups.entries # Array class instance
-group = skill_tree.skillGroups.get 1241 # EOAT::Result::EveType::Row class instance or
+groups = skill_tree.skillGroups.get 1241 # EOAT::Result::EveType::Row class instance or Array
+groups.class
+=> Array
+groups.size
+=> 2
+group = skill_tree.skillGroups.get 505
+group.class
+=> EOAT::Result::EveType::Row
+group.groupID
+=> "505"
+group.groupName
+=> "Fake Skills"
 group = skill_tree.skillGroups.entries.first
 group.groupID
 => "1241"
