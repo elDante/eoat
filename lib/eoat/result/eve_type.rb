@@ -78,7 +78,7 @@ module EOAT
       # @attribute name [String] The name of rowset
       # @attribute entries [Array] The array of Row objects
       class RowSet
-        attr_accessor :key, :columns, :entries
+        attr_accessor :key, :columns, :entries, :entries_index
 
         # @param [Hash] hash the roset value from xml as hash
         def initialize(hash)
@@ -97,15 +97,40 @@ module EOAT
           else
             @entries = Array.new
           end
+          @entries_index = Hash.new
+          if @key
+            @entries.each_with_index do |record, i|
+              key = record.public_send(@key).to_i
+                if @entries_index.key? key
+                  case @entries_index[key]
+                    when Array
+                      @entries_index[key] << i
+                    when Fixnum, Integer
+                      @entries_index[key] = [@entries_index[key], i]
+                    else
+                      # nothing
+                  end
+                else
+                  @entries_index[key] = i
+                end
+            end
+          end
         end
-
-        # TODO: Correct method. Eliminate return of only the first result.
 
         # Get method for entries. Used attribute `key` for indexing.
         # Return first fount Row.
         # @param [Integer, String] key the value that been search
         def get(key)
-          @entries.at(@entries.index {|x| x.send(@key) == key.to_s})
+          index = @entries_index[key]
+          if index
+            case index
+              when Array
+                return @entries.values_at(*index)
+              else
+                return @entries[index]
+            end
+          end
+          nil
         end
       end
 

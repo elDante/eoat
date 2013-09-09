@@ -124,4 +124,13 @@ describe EOAT::Result::EveType::Result do
     stats.factions.VictoryPointsTotal.entries.class.should == Array
     stats.factions.VictoryPointsTotal.entries.first.class.should == EOAT::Result::EveType::Row
   end
+
+  it 'should get Row or Array' do
+    stub_eve_request('/eve/SkillTree.xml.aspx')
+    skills = EOAT::EveApi.new.SkillTree
+    skills.class.should == EOAT::Result::EveType::Result
+    skills.skillGroups.get(505).class.should == EOAT::Result::EveType::Row
+    skills.skillGroups.get(273).class.should == Array
+    skills.skillGroups.get(273).size.should == 10
+  end
 end
