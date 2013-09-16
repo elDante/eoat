@@ -121,7 +121,7 @@ module EOAT
         # Return first fount Row.
         # @param [Integer, String] key the value that been search
         def get(key)
-          index = @entries_index[key]
+          index = @entries_index[key.to_i]
           if index
             case index
               when Array
