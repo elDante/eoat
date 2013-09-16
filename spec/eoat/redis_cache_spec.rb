@@ -9,6 +9,9 @@ describe EOAT::Cache::RedisCache do
 
   it 'return result from cache' do
     EOAT.cache = EOAT::Cache::RedisCache.new
-    EOAT::EveApi.new.ErrorList.from_cache.should == true
+    response = EOAT::EveApi.new.ErrorList
+    response.from_cache.should == true
+    response.errors.class.should == EOAT::Result::EveType::RowSet
+    response.errors.get(513).errorCode.should == '513'
   end
 end

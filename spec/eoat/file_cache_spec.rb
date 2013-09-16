@@ -13,7 +13,10 @@ describe EOAT::Cache::FileCache do
     EOAT.cache = EOAT::Cache::FileCache.new(
         File.expand_path(File.join(File.dirname(__FILE__), '..', 'fixtures/cache'))
     )
-    EOAT::EveApi.new.ErrorList.from_cache.should == true
+    response = EOAT::EveApi.new.ErrorList
+    response.from_cache.should == true
+    response.errors.class.should == EOAT::Result::EveType::RowSet
+    response.errors.get(513).errorCode.should == '513'
   end
 
   it 'was return result again from http' do

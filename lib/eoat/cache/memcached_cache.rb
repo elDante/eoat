@@ -28,8 +28,8 @@ module EOAT
         key = EOAT::Cache.md5hash(host + uri)
         response = @backend.get(key)
         if response
-          if EOAT::Cache.md5hash(response.to_yaml) == @backend.get(key + '_hash')
-            return response
+          if EOAT::Cache.md5hash(response) == @backend.get(key + '_hash')
+            return YAML::load(response)
           else
             @backend.delete(key)
             @backend.delete(key + '_hash')
@@ -51,14 +51,15 @@ module EOAT
         if expire > 0
           # Set key as md5 string
           key = EOAT::Cache.md5hash(host + uri)
+          yaml = content.to_yaml
           @backend.set(
               key,
-              content,
+              yaml,
               :expiry => expire
           )
           @backend.set(
               key + '_hash',
-              EOAT::Cache.md5hash(content.to_yaml),
+              EOAT::Cache.md5hash(yaml),
               :expiry => expire
           )
         end

@@ -69,6 +69,22 @@ module EOAT
             end
           end
         end
+
+        def method_missing(meth, *args, &block)
+          if instance_variable_defined?("@#{meth.to_s}")
+            instance_variable_get("@#{meth.to_s}")
+          else
+            super
+          end
+        end
+
+        def respond_to?(meth)
+          if instance_variable_defined?("@#{meth.to_s}")
+            true
+          else
+            super
+          end
+        end
       end
 
       # Rowset container for xml data.
@@ -132,6 +148,22 @@ module EOAT
           end
           nil
         end
+
+        def method_missing(meth, *args, &block)
+          if instance_variable_defined?("@#{meth.to_s}")
+            instance_variable_get("@#{meth.to_s}")
+          else
+            super
+          end
+        end
+
+        def respond_to?(meth)
+          if instance_variable_defined?("@#{meth.to_s}")
+            true
+          else
+            super
+          end
+        end
       end
 
       # Key-values container. All methods generated automatically.
@@ -180,6 +212,22 @@ module EOAT
               else
                 raise EOAT::Exception::ParseError.new "Unable to parse the the key: #{key}, value: #{value.class}; hash: #{hash}."
             end
+          end
+        end
+
+        def method_missing(meth, *args, &block)
+          if instance_variable_defined?("@#{meth.to_s}")
+            instance_variable_get("@#{meth.to_s}")
+          else
+            super
+          end
+        end
+
+        def respond_to?(meth)
+          if instance_variable_defined?("@#{meth.to_s}")
+            true
+          else
+            super
           end
         end
       end
