@@ -29,15 +29,14 @@ module EOAT
     end
 
     # Method-collector of private methods. Performs basic algorithm of output.
-    def get
-      cache = cache_get
+    def get(cache)
       if cache
-        cache
-      else
-        result = @result.new(http_request)
-        cache_save(result)
-        result
+        cache_response = cache_get
+        return(cache_response) if cache_response
       end
+      response = @result.new(http_request)
+      cache_save(response)
+      response
     end
 
     private

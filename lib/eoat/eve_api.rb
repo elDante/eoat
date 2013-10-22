@@ -28,9 +28,9 @@ module EOAT
     # Create an request according to the method called.
     # This is used to dynamically create api calls.
     # @return [Object] the result class
-    def method_missing(method, **kwargs)
+    def method_missing(method, cache: true, **kwargs)
       uri = create_uri(method.id2name, kwargs)
-      EOAT::Request.new(@host, uri, EOAT::Result::EveType::Result).get
+      EOAT::Request.new(@host, uri, EOAT::Result::EveType::Result).get(cache)
     end
 
     private
