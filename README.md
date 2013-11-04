@@ -359,7 +359,6 @@ It may happen that you will be denied to provide data if you do not specify them
 EOAT.headers
 => {"User-Agent"=>"EOAT/0.0.1 (Eve Online Api Toolbox;+https://github.com/elDante/eoat)", "Accept-Encoding"=>"gzip", "Accept-Charset"=>"utf-8"}
 EOAT.headers['User-Agent'] = 'Custom User-Agent'
-EOAT.headers['Host'] = 'example.com'
 EOAT.headers['From'] = 'user@example.com'
 ```
 
