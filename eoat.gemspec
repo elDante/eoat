@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name        = 'eoat'
   spec.version     = EOAT::VERSION
   spec.authors     = ['Ivan Kotov']
-  spec.email       = ['i.spec.kotov@gmail.com']
+  spec.email       = ['i.s.kotov@gmail.com']
   spec.homepage    = 'https://github.com/elDante/eoat'
   spec.summary     = %q{Eve Online API toolbox}
   spec.description = %q{Eve Online API toolbox}
