@@ -25,13 +25,13 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'memcache', '~> 1.5.1'
   spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'rspec-core', '~> 2.10.0'
-  spec.add_development_dependency 'rspec-expectations', '~> 2.10.0'
-  spec.add_development_dependency 'rr', '~> 1.0.4'
+  spec.add_development_dependency 'redcarpet', '~> 3.1.1'
+  spec.add_development_dependency 'redis', '~> 3.0.7'
+  spec.add_development_dependency 'rr', '~> 1.1.2'
+  spec.add_development_dependency 'rspec-core', '~> 2.14.8'
+  spec.add_development_dependency 'rspec-expectations', '~> 2.14.5'
+  spec.add_development_dependency 'webmock', '~> 1.17.4'
   spec.add_development_dependency 'yard', '~> 0.8.7'
-  spec.add_development_dependency 'redcarpet', '~> 2.1.1'
-  spec.add_development_dependency 'webmock', '~> 1.13.0'
-  spec.add_development_dependency 'memcache', '~> 1.4.1'
-  spec.add_development_dependency 'redis', '~> 3.0.4'
 end

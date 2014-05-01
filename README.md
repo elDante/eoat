@@ -1,4 +1,4 @@
-# EOAT
+# EOAT [![Build Status](https://secure.travis-ci.org/elDante/eoat.png?branch=master)](http://travis-ci.org/elDante/eoat) [![Dependency Status](https://gemnasium.com/elDante/eoat.png)](http://gemnasium.com/elDante/eoat)
 
 **EVE Online API Toolbox** a single tool to access the API of a variety resources for the EVE Online.
 
